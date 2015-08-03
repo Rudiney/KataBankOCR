@@ -41,10 +41,19 @@ class DisplayInterface
     return me
   end
 
+  def self.parse_file(file_content)
+    lines = file_content.split("\n").in_groups_of(4)
+    list = lines.map do |screen_line|
+      self.from_screen(screen_line.join("\n"))
+    end
+
+    require 'pry'; binding.pry
+  end
+
   def parse_screen(screen)
     screen_lines = screen.split("\n")
-    raise 'Im expected 4 lines' unless screen_lines.size == 4
-    screen_lines.pop #ignore the 4th line
+    raise 'Im expected at least 3 lines' if screen_lines.size < 3
+    screen_lines.pop if screen_lines.size == 4  #ignore the 4th line
     self.digits = []
 
     9.times do |i|
