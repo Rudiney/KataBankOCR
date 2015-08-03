@@ -15,8 +15,7 @@ RSpec.describe DisplayInterface do
                "                           \n"
       parsed = DisplayInterface.from_screen(screen)
 
-      expect(parsed.digits).to eql 123456789
+      expect(parsed.digits).to eql [1,2,3,4,5,6,7,8,9]
     end
   end
-
 end
