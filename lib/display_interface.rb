@@ -47,7 +47,7 @@ class DisplayInterface
       self.from_screen(screen_line.join("\n"))
     end
 
-    require 'pry'; binding.pry
+    list.map { |di| di.to_s }
   end
 
   def parse_screen(screen)
@@ -59,11 +59,15 @@ class DisplayInterface
     9.times do |i|
       digit_columns = (i*3)..(i*3+2)
 
-      digit = screen_lines[0][digit_columns]
+      digit = screen_lines[0][digit_columns] || []
       digit << screen_lines[1][digit_columns]
       digit << screen_lines[2][digit_columns]
 
-      self.digits << DIGITS_MAP[digit]
+      self.digits << DIGITS_MAP[digit] || '?'
     end
+  end
+
+  def to_s
+    digits.join
   end
 end
