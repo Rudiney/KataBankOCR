@@ -43,11 +43,9 @@ class DisplayInterface
 
   def self.parse_file(file_content)
     lines = file_content.split("\n").in_groups_of(4)
-    list = lines.map do |screen_line|
+    lines.map do |screen_line|
       self.from_screen(screen_line.join("\n"))
     end
-
-    list.map { |di| di.to_s }
   end
 
   def parse_screen(screen)
@@ -69,5 +67,9 @@ class DisplayInterface
 
   def to_s
     digits.join
+  end
+
+  def to_account
+    Account.new(self.digits)
   end
 end
